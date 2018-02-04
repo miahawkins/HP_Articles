@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Use express.static to make statis css etc work
 app.use(express.static("public"));
 
+//Scraper info
+//////////////////////////////////////////////////////////////////////////////////////////
 console.log("\n***********************************\n" +
             "Grabbing every thread name and link\n" +
             "from mugglenet.com:" +
@@ -53,18 +55,19 @@ request("https://www.mugglenet.com", function(error, response, html) {
         summary: summary,
         pic: pic
     });
-  });
+});
 
   // Log the results once you've looped through each of the elements found with cheerio
   console.log(results);
 });
 
+//Mongoose info
+///////////////////////////////////////////////////////////////////////////////
+
 // By default mongoose uses callbacks for async queries, now setting it to use promises instead
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/hp_articles", {
-  useMongoClient: true
-});
+mongoose.connect("mongodb://localhost/hp_articles");
 
 // Route to post our form submission to mongoDB via mongoose
 app.post("/submit", function(req, res) {
