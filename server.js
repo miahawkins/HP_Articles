@@ -6,14 +6,13 @@ var bodyParser = require("body-parser");
 var cheerio = require("cheerio");
 var request = require("request");
 
+var articles = require("./models/articles.js");
 var PORT = 3000;
 
 //Start Express
 var app = express();
-
 // Use body-parser for handling form submissions
 app.use(bodyParser.urlencoded({ extended: false }));
-
 // Use express.static to make statis css etc work
 app.use(express.static("public"));
 
@@ -61,13 +60,20 @@ request("https://www.mugglenet.com", function(error, response, html) {
   console.log(results);
 });
 
-//Mongoose info
+//Mongoose/MongoDB info
 ///////////////////////////////////////////////////////////////////////////////
 
-// By default mongoose uses callbacks for async queries, now setting it to use promises instead
 // Connect to the Mongo DB
-mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/hp_articles");
+var mongoDB = "mongodb://localhost/hp_articles";
+mongoose.connect(mongoDB);
+
+// Get Mongoose to use the global promise library
+mongoose.Promise = global.Promise;
+//Get the default connection
+var db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Route to post our form submission to mongoDB via mongoose
 app.post("/submit", function(req, res) {

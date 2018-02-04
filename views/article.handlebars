@@ -1,0 +1,17 @@
+{{# each contents}}
+    <div class="row">
+        <div class="col-lg-12" align="center">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>
+                        <a class="article-link" target="_blank" href={{ this.url}}>{{this.headline}}</a>
+                        <img src="{{this.pic}}"> 
+                        <p>{{this.summary}}</p>
+                        <a class="btn btn-success save">Save Article</a>
+                    </h3>
+                </div>
+                <div class="panel-body">{{this.summary}}</div>
+            </div>
+        </div>
+    </div>
+{{/each}}
