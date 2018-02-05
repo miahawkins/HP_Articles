@@ -6,17 +6,11 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema(
     {
-      name: String,
-      binary: Buffer,
-      living: Boolean,
-      updated: { type: Date, default: Date.now },
-      age: { type: Number, min: 18, max: 65, required: true },
-      mixed: Schema.Types.Mixed,
-      _someId: Schema.Types.ObjectId,
-      array: [],
-      ofString: [String], // You can also have an array of each of the other types too.
-      nested: { stuff: { type: String, lowercase: true, trim: true } }
+      headline: {type: String, required: true},
+      url: {type: String, required: true},
+      summary: {type: String, required: true},
+      pic: {type: String, required: true}
     })
 
 // Compile model from schema
-var SomeModel = mongoose.model('SomeModel', schema );
+var SomeModel = mongoose.model('Articles', schema );
