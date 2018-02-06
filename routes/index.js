@@ -7,15 +7,14 @@ var path = require("path");
 //Need the models
 var Articles = require("../models/articles.js");
 var Comments = require("../models/comments.js");
-
+var db = require("../models");
 // GET home page
 router.get("/", function(req, res){
     //Scraper info
     //////////////////////////////////////////////////////////////////
 
     // Making a request from mugglenet.com. The page's HTML is passed as the callback's third argument
-    request("https://www.mugglenet.com", function(error, response, html) {
-
+    request("http://www.mugglenet.com", function(error, response, html) {
     // Load the HTML into cheerio and save it to a variable
     var $ = cheerio.load(html);
 
@@ -38,18 +37,20 @@ router.get("/", function(req, res){
 
         // Save these results in an object that we'll push into the results array we defined earlier
         results.push({
-            headline: headline,
-            url: url,
-            summary: summary,
-            pic: pic
+            headline: scrapedInfo.headline,
+            url: scrapedInfo.url,
+            summary: scrapedInfo.summary,
+            pic: scrapedInfo.pic
         });
     });
     res.redirect("/articles");
+
+    });
 });
 
 router.get("/articles", function(req, res) {
-    Article.find().sort({_id: 1})
-    var hbsObject = {articles: content} //not sure if content is right
+    db.Article.find().sort({_id: 1})
+    var hbsObject = {articles: results} 
     res.render("articles", hbsObject);
 });
 

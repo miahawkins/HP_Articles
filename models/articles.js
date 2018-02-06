@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 //Define a schema
 var Schema = mongoose.Schema;
 
-var schema = new Schema(
+var Articles = new Schema(
     {
       headline: {type: String, required: true},
       url: {type: String, required: true},
@@ -13,4 +13,6 @@ var schema = new Schema(
     })
 
 // Compile model from schema
-var SomeModel = mongoose.model('Articles', schema );
+var SomeModel = mongoose.model('Articles', Articles );
+
+module.exports = SomeModel;

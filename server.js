@@ -1,6 +1,6 @@
 //Dependencies
 var express = require("express");
-var exphdb = require("express-handlebars");
+var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var cheerio = require("cheerio");
@@ -8,7 +8,7 @@ var request = require("request");
 
 var Comments = require("./models/comments.js");
 var Articles = require("./models/articles.js");
-var PORT =processs.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 
 //Start Express
 var app = express();
