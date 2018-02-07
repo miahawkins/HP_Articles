@@ -1,18 +1,20 @@
 //Require Mongoose
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 //Define a schema
 var Schema = mongoose.Schema;
 
-var Articles = new Schema(
+var ArticleSchema = new Schema(
     {
       headline: {type: String, required: true},
       url: {type: String, required: true},
       summary: {type: String, required: true},
-      pic: {type: String, required: true}
-    })
+      pic: {type: String, required: true},
+      comment: {type: Schema.Types.ObjectId, ref: "Comments"}
+    }
+);
 
 // Compile model from schema
-var SomeModel = mongoose.model('Articles', Articles );
+var Article = mongoose.model("articles", ArticleSchema );
 
-module.exports = SomeModel;
+module.exports = Article;
