@@ -41,9 +41,11 @@ router.get("/", function(req, res){
             scrapedInfo.summary = $(element).children("div").children("div").children("p").text().trim();
             scrapedInfo.pic = $(element).children("div").children("div").children("a").children("img").attr("src").trim();
             console.log(scrapedInfo);
-            db.Article.create(scrapedInfo)
-                .then(function(hp_articlesDB) {
-                    console.log(hp_articlesDB);
+            console.log(Object.keys(db));
+            db.Articles.create(scrapedInfo)
+                .then(function(newArticle) {
+                    console.log(newArticle);
+                    
                 })
                 .catch(function(err) {
                     return res.json(err);
@@ -55,18 +57,25 @@ router.get("/", function(req, res){
             //     summary: scrapedInfo.summary,
             //     pic: scrapedInfo.pic
             // });
-            });
+        });
     // results.insert
-    // res.redirect("/articles");
-    res.send("Scrape Complete")
+    res.redirect("/articles");
 
+    // res.send("Scrape Complete")
+    // res.render("article", scrapedInfo);
+    
     });
 });
 
 router.get("/articles", function(req, res) {
-    Articles.find({})
+    db.Articles.find({})
     .then(function(hp_articlesDB) {
-        res.json(hp_articlesDB);
+        var hdbobj = {
+            articles: hp_articlesDB
+        };
+        // res.json(hp_articlesDB);
+        console.log(Object.keys(hp_articlesDB));
+        res.render("article", hdbobj);
     })
     .catch(function(err) {
         res.json(err);
@@ -76,7 +85,7 @@ router.get("/articles", function(req, res) {
     // res.render("articles", hbsObject);
 });
 
-router.get("/articales/:id", function(req, res) {
+router.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id })
     .populate("comments")
     .then(function(hp_articlesDB) {

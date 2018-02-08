@@ -20,7 +20,6 @@ app.use(express.static("./public"));
 //For Handlebars
 app.engine('handlebars', exphbs({
 	defaultLayout: 'main',
-	layoutsDir: "./app/views/layouts/",
 	extname: '.handlebars'
 }));
 app.set('view engine', 'handlebars');
@@ -29,7 +28,7 @@ app.set('view engine', 'handlebars');
 ///////////////////////////////////////////////////////////////////////////////
 
 // Connect to the Mongo DB
-var mongoDB = "mongodb://localhost/hp_articles";
+var mongoDB = "mongodb://localhost/muggle";
 mongoose.connect(mongoDB);
 
 // Get Mongoose to use the global promise library
@@ -42,7 +41,7 @@ if(process.env.NODE_ENV == "production") {
 }
 else{
     // Connect to the Mongo DB
-    var mongoDB = "mongodb://localhost/hp_articles";
+    var mongoDB = "mongodb://localhost/muggle";
     mongoose.connect(mongoDB);
 }
 //Get the default connection
