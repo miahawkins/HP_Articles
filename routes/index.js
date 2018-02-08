@@ -10,9 +10,12 @@ var Comments = require("../models/comments.js");
 var db = require("../models");
 
 
+router.get("/", function(req, res) {
+    res.render("article");
+})
 
 // GET home page
-router.get("/", function(req, res){
+router.get("/scrape", function(req, res){
     //Scraper info
     //////////////////////////////////////////////////////////////////
     console.log("\n***********************************\n" +

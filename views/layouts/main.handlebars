@@ -3,7 +3,7 @@
     <head>
         <title>Harry Potter Articles</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
         
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     </head>
@@ -11,20 +11,23 @@
     <!-- Start Nav -->  
     <nav class="navbar navbar-default">
         <div class="container">
-        <div class="navbar-header" >
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-            </button>
-            <h3>MuggleNet Articles!</h3>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
+            <div class="navbar-header" >
+                {{!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+                </button> --}}
+                <h3>MuggleNet Articles!</h3>
+                <a class="btn btn-success" href="/">Home</a>
+                <a class="btn btn-success" href="/saved">Saved Articles</a>
+                <a class="btn btn-success" href="/scrape">Scrape New Articles</a>
+            </div>
+        {{!-- <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Home</a></li>
                 <li><a href="/saved">Saved Articles</a></li>
             </ul>
-        </div>
+        </div> --}}
         </div>
     </nav>
 
