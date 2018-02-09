@@ -9,12 +9,12 @@ var Articles = require("../models/articles.js");
 var Comments = require("../models/comments.js");
 var db = require("../models");
 
-
+//GET home page
 router.get("/", function(req, res) {
     res.render("article");
 })
 
-// GET home page
+// GET scraped info
 router.get("/scrape", function(req, res){
     //Scraper info
     //////////////////////////////////////////////////////////////////
@@ -70,8 +70,9 @@ router.get("/scrape", function(req, res){
     });
 });
 
+//GET articles page with scraped info
 router.get("/articles", function(req, res) {
-    db.Articles.find({})
+    db.Articles.find({}).limit(8)
     .then(function(hp_articlesDB) {
         var hdbobj = {
             articles: hp_articlesDB
@@ -88,17 +89,29 @@ router.get("/articles", function(req, res) {
     // res.render("articles", hbsObject);
 });
 
+//once clicked saved button redirect to saved articles
+router.get("/saved", function(req, res) {
+    //need to add only saved articles
+    res.render("articles");
+});
+
+router.get("/comment", function(req, res) {
+    res.render("comment");
+})
+
+//once click add comment 
 router.get("/articles/:id", function(req, res) {
-    db.Article.findOne({ _id: req.params.id })
-    .populate("comments")
-    .then(function(hp_articlesDB) {
-        res.json(hp_articlesDB);
+    db.Articles.findOne({ _id: req.params.id })
+    .populate("comment")
+    .then(function(info) {
+        res.render("article", info);
     })
     .catch(function(err) {
         res.json(err);
     });
 });
 
+//POST comment to muggle DB
 router.post("/articles/:id", function(req, res) {
     db.Comments.create(req.body)
     .then(function(hp_articlesDB) {
